@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../_css/bootstrap.css">
+    <script src="../_js/popper.min.js"></script> 
+    <script src="../_js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        li[class^=nav] {
+            position: relative;
+        }
+
+        li[class^=nav]::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #576f72;
+        }
+
+        li[class^=nav]:hover::after {
+            transition: width 0.5s ease;            width: 100%;        }
+        #mynav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        @media screen and (max-width: 1200px) {
+            li[class^=nav]::after {
+                background-color: transparent;
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            li[class^=nav]:hover {
+                text-shadow: 1px 1px 1px rgba(107, 106, 106, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        i {
+            margin-right: 20px;
+        }
+
+        i:hover {
+            color: grey;
+            cursor: pointer;
+        }
+
+        .topic {
+            font-weight: bold;
+        }
+
+
+
+        .photo-grid {
+            position: relative;            display: block;
+            height: 400px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .photo-overlay {
+            position: absolute;            top: 0;
+            width: 100%;
+            height: 100%;
+            color: white;
+            display: flex;            flex-direction: column;            justify-content: center;            text-align: center;        }
+
+        .photo-overlay:hover {
+            background: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            filter: invert(1);
+        }
+
+        .photo-overlay b {
+            font-size: 1rem;
+        }
+
+        .row {
+            margin: 0;
+        }
+
+        .col-md-6,
+        .col-md-12 {
+            padding: 0;
+        }
+        .news-item {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-date {
+            font-weight: bold;
+            color: #888;
+        }
+
+        .news-title {
+            margin-top: 5px;
+        }
+
+        .news-title a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .news-title a:hover {
+            text-decoration: underline;
+            color: #007bff;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #000;
+        }
+
+
+
+        .mybutton:hover {
+            color: #0060c7;
+            box-shadow: inset 0 0 10px rgba(152, 150, 150, 0.5),                0 0 15px rgba(33, 31, 31, 0.5);            transition: all 0.5s ease;
+        }
+
+        footer {
+            background-color: #f9f9f9;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        footer h2 {
+            font-size: 1.5em;
+            margin: 0 0 10px;
+        }
+
+        footer p {
+            margin: 15px 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        footer .links {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        footer .links a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 0.9em;
+        }
+
+        footer .links a:hover {
+            text-decoration: underline;
+        }
+
+        footer .contact-info {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        footer .copyright {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #aaa;
+        }
+
+        .back-to-top {
+            position: absolute;
+            bottom: 0;
+            right: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .back-to-top a {
+            display: inline-block;
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .back-to-top a:hover {
+            text-decoration: underline;
+        }
+
+        .back-to-top svg {
+            display: block;
+            margin: 0 auto;
+            fill: #555;
+            width: 30px;
+            height: 30px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            margin-top: 700px;
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>    <nav class="navbar navbar-expand-xl bg-light fixed-top" id="mynav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img class="img-fluid" src="./logo.png" style="width: 200px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active topic text-wrap" aria-current="page" href="#new"
+                            id="newInfoLink">最新情報</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active topic" aria-current="page" href="access.html">アクセス情報</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active topic" aria-current="page" href="#">総合案内</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active topic" aria-current="page" href="#">展覧会</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active topic" aria-current="page" href="hours.html">開館時間．料金</a>
+                    </li>
+                </ul>                <i class="bi bi-twitter-x fs-5"></i>
+                <i class="bi bi-instagram fs-5"></i>
+                <i class="bi bi-youtube fs-5"></i>
+                <i class="bi bi-facebook fs-5"></i>                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="サイト内検索" aria-label="Search">
+                    <i class="bi bi-search mt-2"></i>
+                </form>            </div>
+        </div>
+    </nav>
+    <div class="container mt-4 my-element mb-4">
+        <div class="row">
+            <div class="col-md-6 photo-grid" style="height: 800px;">
+                <img src="./photo1.jpg" alt="Photo 1;">
+                <div class="photo-overlay">
+                    <h2>美術館から眺める海と空</h2>
+                    <b>大ひさしの下や大段階から、波のきらめきや行き交う船を眺めよう。</b>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12 photo-grid">
+                        <img src="./photo2.jpg" alt="Photo 2">
+                        <div class="photo-overlay">
+                            <h3>Ando Galleryを起点に巡る屋外スペース</h3>
+                            <b>「海」、「山」、「風」、全てのデッキを廻って見よう。</b>
+                        </div>
+                    </div>
+                    <div class="col-md-12 photo-grid">
+                        <img src="./photo3.jpg" alt="Photo 3">
+                        <div class="photo-overlay">
+                            <h3>円形テラス</h3>
+                            <b>当屈指の人気撮影スポット。コンクリートの造形美をお楽しみください。</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <br id="new"><br><br>
+
+    <h1 class="text-center"><b>最新情報</b></h1>
+    <div class="container mt-4">
+        <div class="news-item">
+            <div class="news-date">2024.12.19</div>
+            <div class="news-title">
+                <a href="#">チャンネル15　森山未來、梅田哲也《艀（はしけ）》鑑賞事前申込受付中！</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2024.12.18</div>
+            <div class="news-title">
+                <a href="#">12月21日（土）　米田知子×束芋アーティストトークを開催します</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2024.12.15</div>
+            <div class="news-title">
+                <a href="#">「30年目のわたしたち」展～SNS投稿キャンペーン～</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2024.12.14</div>
+            <div class="news-title">
+                <a href="#">「30年目のわたしたち」展～デジタルチケットキャンペーン～</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2024.12.08</div>
+            <div class="news-title">
+                <a href="#">年末年始休館（12月29日（日）から1月３日（金））について</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2024.12.03</div>
+            <div class="news-title">
+                <a href="#">兵庫県立美術館4階 屋外展示スペース「風のデッキ」に作品設置作業がはじまります！</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2024.12.01</div>
+            <div class="news-title">
+                <a href="#">１月11日(土)　HART TALK 館長といっしょ！Vol.14　彫刻家、青木野枝さんをお迎えして―兵庫県立美術館への屋外作品設置を終えて」開催！</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2024.11.29</div>
+            <div class="news-title">
+                <a href="#">１月12日(日)　「震災30年～まちは人がつくる」安藤忠雄氏講演会開催！</a>
+            </div>
+        </div>
+    </div>
+    <div class="container pt-5">
+        <h1 class="text-center fw-bold mb-4">安藤建築見どころ写真集</h1>
+        <p class="text-center text-muted mb-5">日本を代表する建築家、安藤忠雄氏の設計による美術館には見どころがいっぱいです</p>
+    </div>
+    <div class="container d-none d-lg-block mt-4">
+        <div class="row g-3">
+            <div class="col-lg-4">
+                <img src="./photo4.jpg" class="img-fluid" alt="Photo 1">
+            </div>
+            <div class="col-lg-4">
+                <img src="./photo5.jpg" class="img-fluid" alt="Photo 2">
+            </div>
+            <div class="col-lg-4">
+                <img src="./photo6.jpg" class="img-fluid" alt="Photo 3">
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-4">
+                <img src="./photo7.jpg" class="img-fluid" alt="Photo 1">
+            </div>
+            <div class="col-lg-4">
+                <img src="./photo8.jpg" class="img-fluid" alt="Photo 2">
+            </div>
+            <div class="col-lg-4">
+                <img src="./photo9.jpg" class="img-fluid" alt="Photo 3">
+            </div>
+        </div>
+    </div>
+    <div id="photoCarousel" class="carousel slide d-lg-none mt-4" data-bs-ride="carousel">
+        <div class="carousel-inner ">
+            <div class="carousel-item active">
+                <img src="./photo4.jpg" class="d-block w-50 m-auto" alt="Photo 1">
+            </div>
+            <div class="carousel-item">
+                <img src="./photo5.jpg" class="d-block w-50 m-auto" alt="Photo 2">
+            </div>
+            <div class="carousel-item">
+                <img src="./photo6.jpg" class="d-block w-50 m-auto" alt="Photo 3">
+            </div>
+            <div class="carousel-item">
+                <img src="./photo7.jpg" class="d-block w-50 m-auto" alt="Photo 3">
+            </div>
+            <div class="carousel-item">
+                <img src="./photo8.jpg" class="d-block w-50 m-auto" alt="Photo 3">
+            </div>
+            <div class="carousel-item">
+                <img src="./photo9.jpg" class="d-block w-50 m-auto" alt="Photo 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div style="text-align: center">
+        <button type="button" class="btn btn-primary btn-lg m-5 rounded-3 mybutton"
+            style="padding-top:10px ;padding-bottom: 10px; padding-left: 30px;padding-right: 30px; background-color: #000;"><b>一覧を見る&nbsp;&nbsp;&nbsp;&nbsp;</b><b
+                style="font-size:smaller;">▶︎</b></button>
+    </div>
+
+    <footer>
+        <h2>兵庫県立美術館</h2>
+        <div class="contact-info">
+            <p>〒651-0073　神戸市中央区脇浜海岸通1-1-1(HAT神戸内)</p>
+            <p>電話番号：078-262-1011</p>
+        </div>
+        <div class="links">
+            <a href="#">サイトマップ</a>
+            <a href="#">外部リンク集</a>
+            <a href="#">商業目的撮影のご案内</a>
+            <a href="#">個人情報保護方針</a>
+            <a href="#">サイトポリシー</a>
+            <a href="#">よくあるご質問</a>
+            <a href="#">お問い合わせ</a>
+        </div>
+        <div class="copyright">
+            Copyright © Hyogo Prefectural Museum of Art. All rights reserved.
+        </div>
+    </footer>
+    <div class="back-to-top">
+        <a href="#top" id="backToTop">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1.5em" height="1.5em">
+                <path d="M12 18V6M6 12l6-6 6 6" />
+            </svg>
+            PAGE TOP
+        </a>
+    </div>
+
+
+    <script>
+        document.getElementById("backToTop").addEventListener("click", function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const backToTopButton = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        document.getElementById('newInfoLink').addEventListener('click', function () {
+            const navCollapse = document.getElementById('navbarSupportedContent');
+            if (navCollapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(navCollapse);
+                bsCollapse.hide();
+            }
+        });
+    </script>
+</body>
+
+
+</html>

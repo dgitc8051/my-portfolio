@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="../_css/bootstrap.css">
+  <script src="../_js/popper.min.js"></script> 
+  <script src="../_js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    li[class^=nav] {
+      position: relative;
+    }
+
+    li[class^=nav]::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #656565;
+      transition: width 0.5s ease;
+    }
+
+    li[class^=nav]:hover::after {
+      width: 100%;
+    }
+
+
+    #mynav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+
+    @media screen and (max-width: 992px) {
+      li[class^=nav]::after {
+        background-color: transparent;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      li[class^=nav]:hover {
+        text-shadow: 1px 1px 1px rgba(107, 106, 106, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+
+
+
+    i {
+      margin-right: 20px;
+    }
+
+    i:not(.myicon):hover {
+      color: grey;
+      cursor: pointer;
+    }
+
+
+    .topic {
+      font-weight: bold;
+    }
+
+
+
+
+
+    .section-title {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .tab-content {
+      padding: 15px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-top: none;
+    }
+
+    .myli:hover {
+      color: #0060c7;
+      box-shadow: inset 0 0 10px rgba(152, 150, 150, 0.2),
+        0 0 15px rgba(33, 31, 31, 0.2);
+    }
+
+    .schedule {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+
+    .route h2 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .arrow {
+      font-size: 1.5em;
+      color: #1e90ff;
+    }
+
+    .time-info {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .bus-lines {
+      list-style: none;
+      padding: 0;
+    }
+
+    .bus-lines>li {
+      margin-bottom: 10px;
+    }
+
+    .bus-lines>li strong {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .bus-lines ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    .bus-lines li {
+      margin-bottom: 5px;
+    }
+
+    li a {
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      #carmap {
+        width: 100% !important;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .route {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .route {
+        width: 90%;
+        height: auto;
+      }
+
+      .schedule {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+
+
+    .info-section {
+      background-color: #f8f8f8;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .info-section h4 {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .info-table {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .info-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      width: 48%;
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .info-box img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .info-box p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    .info-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .info-buttons a {
+      display: inline-block;
+      text-align: center;
+      padding: 10px 15px;
+      border: 1px solid #000;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 0.9em;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .info-buttons a:hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+
+    footer {
+      background-color: #f9f9f9;
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      position: relative;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    footer h2 {
+      font-size: 1.5em;
+      margin: 0 0 10px;
+    }
+
+    footer p {
+      margin: 15px 0;
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    footer .links {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer .links a {
+      text-decoration: none;
+      color: #007BFF;
+      font-size: 0.9em;
+    }
+
+    footer .links a:hover {
+      text-decoration: underline;
+    }
+
+    footer .contact-info {
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    footer .copyright {
+      margin-top: 15px;
+      font-size: 0.8em;
+      color: #aaa;
+    }
+
+    .back-to-top {
+      position: absolute;
+      bottom: 0;
+      right: 20px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .back-to-top a {
+      display: inline-block;
+      text-decoration: none;
+      color: #555;
+      font-weight: bold;
+      font-size: 0.8em;
+    }
+
+    .back-to-top a:hover {
+      text-decoration: underline;
+    }
+
+    .back-to-top svg {
+      display: block;
+      margin: 0 auto;
+      fill: #555;
+      width: 30px;
+      height: 30px;
+    }
+
+    .back-to-top {
+      position: fixed;
+      margin-top: 700px;
+      display: none;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-xl bg-light fixed-top" id="mynav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img class="img-fluid" src="./logo.png" style="width: 200px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active topic text-wrap" aria-current="page" href="./index.html">最新情報</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active topic" aria-current="page" href="access.html">アクセス情報</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active topic" aria-current="page" href="#">総合案内</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active topic" aria-current="page" href="#">展覧会</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active topic" aria-current="page" href="hours.html">開館時間．料金</a>
+          </li>
+        </ul>
+
+  
+        <i class="bi bi-twitter-x fs-5"></i>
+        <i class="bi bi-instagram fs-5"></i>
+        <i class="bi bi-youtube fs-5"></i>
+        <i class="bi bi-facebook fs-5"></i>
+
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="サイト内検索" aria-label="Search">
+          <i class="bi bi-search mt-2"></i>
+        </form>
+
+      </div>
+    </div>
+  </nav>
+  <br><br>
+
+  <div class="container">
+    <h1 class="section-title">アクセス情報</h1>
+  </div>
+
+  <div class="container mt-4">
+    <ul class="nav nav-tabs justify-content-center" role="tablist">
+      <li class="mynav-item myli" role="presentation">
+        <button class="nav-link active" id="map-tab" data-bs-toggle="tab" data-bs-target="#map" type="button" role="tab"
+          aria-controls="map" aria-selected="true">所在地</button>
+      </li>
+      <li class="mynav-item" role="presentation">
+        <button class="nav-link myli" id="drive-tab" data-bs-toggle="tab" data-bs-target="#drive" type="button"
+          role="tab" aria-controls="drive" aria-selected="false">車をご利用の場合</button>
+      </li>
+      <li class="mynav-item" role="presentation">
+        <button class="nav-link myli" id="transport-tab" data-bs-toggle="tab" data-bs-target="#transport" type="button"
+          role="tab" aria-controls="transport" aria-selected="false">バスをご利用の場合</button>
+      </li>
+      <li class="mynav-item" role="presentation">
+        <button class="nav-link myli" id="trainsport-tab" data-bs-toggle="tab" data-bs-target="#trainsport"
+          type="button" role="tab" aria-controls="trainsport" aria-selected="false">電車</button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="infoTabsContent">
+      <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
+        <h4 class="mt-4 mb-4"><i class="bi bi-pin-map"></i><b>所在地</b></h4>
+        <b>〒651-0073　神戸市中央区脇浜海岸通1-1-1(HAT神戸内)</b><br>
+        <b>TEL: 078-262-1011</b>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.2351090122647!2d135.21567657554613!3d34.69924947292015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008e86906eb067%3A0x828759978b8b47e2!2z5YW15bqr57ij56uL576O6KGT6aSo!5e0!3m2!1szh-TW!2sjp!4v1734509245339!5m2!1szh-!2sjp"
+          width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <div class="tab-pane fade" id="drive" role="tabpanel" aria-labelledby="drive-tab">
+        <h4 class="mt-4 mb-4"><i class="bi bi-car-front"></i><b>車をご利用の場合</b></h4>
+        <ul>
+          <li>阪神高速3号神戸線「摩耶ランプ」から「摩耶ランプ南」交差点を西へ　「摩耶ランプ」からの所要時間約5分</li>
+          <li>国道2号線から「岩屋中町4」交差点を南へ</li>
+        </ul>
+        <br>
+        <h5><b>＜駐車場＞</b></h5>
+        <ul>
+          <li>当館駐車場は地下にございます。</li>
+          <li>利用時間：9:45〜19:00</li>
+          <li>駐車台数：乗用車80台</li>
+          <li>駐車料金：2時間まで400円。以降30分毎200円。（インフォメーションで割引処理をお願いします）</li>
+        </ul>
+        <b style="color: red;">※周辺駐車場ご利用の場合、当館の駐車割引はございませんのでご了承願います。</b>
+        <br>
+        <div style="text-align: center;">
+          <br>
+          <h4><b>美術館入口周辺MAP</b></h4>
+        </div>
+        <br>
+        <img src="./map.png" alt="" class="card w-75 m-auto carmap" id="carmap">
+      </div>
+
+      <div class="tab-pane fade" id="transport" role="tabpanel" aria-labelledby="transport-tab">
+        <h4 class="mt-4 mb-4"><i class="bi bi-bus-front"></i> バスをご利用の場合</h4>
+        <div class="schedule">
+          <div class="route">
+            <h2>三宮駅ターミナル前 <span class="arrow">⇄</span> 県立美術館前</h2>
+            <p class="time-info">約15分</p>
+            <ul class="bus-lines">
+              <li><strong>三宮駅ターミナル前から</strong>
+                <ul>
+                  <li><a href="https://www.city.kobe.lg.jp/life/access/transport/bus/jikoku/basjikoku/026602.pdf"
+                      target="_blank">29系統</a></li>
+                  <li><a href="https://www.city.kobe.lg.jp/life/access/transport/bus/jikoku/basjikoku/026603.pdf"
+                      target="_blank">101系統</a></li>
+                </ul>
+              </li>
+              <li><strong>県立美術館前から</strong>
+                <ul>
+                  <li><a href="https://www.city.kobe.lg.jp/life/access/transport/bus/jikoku/basjikoku/018902.pdf"
+                      target="_blank">29系統（摩耶埠頭経由）</a></li>
+                  <li><a href="https://www.city.kobe.lg.jp/life/access/transport/bus/jikoku/basjikoku/018904.pdf"
+                      target="_blank">29系統（電車通経由）・101系統（阪急春日野道経由）</a></li>
+                  <li><a href="https://www.city.kobe.lg.jp/life/access/transport/bus/jikoku/basjikoku/018901.pdf"
+                      target="_blank">101系統（※脇の浜 経由）</a></li>
+                </ul>
+                <br>
+              <li><b>※時間帯によっては<b style="color: red;">約34分</b>かかる場合がありますのでご注意ください</b></li>
+              </li>
+            </ul>
+          </div>
+          <div class="route">
+            <h2>阪急王子公園 <span class="arrow">⇄</span> 県立美術館前</h2>
+            <p class="time-info">約12分</p>
+            <ul class="bus-lines">
+              <li><strong>阪急王子公園前から</strong>
+                <ul>
+                  <li><a href="https://www.city.kobe.lg.jp/life/access/transport/bus/jikoku/basjikoku/014901.pdf"
+                      target="_blank">100系統</a></li>
+                </ul>
+              </li>
+              <li><strong>県立美術館前から</strong>
+                <ul>
+                  <li><a href="https://www.city.kobe.lg.jp/life/access/transport/bus/jikoku/basjikoku/018902.pdf"
+                      target="_blank">100系統</a></li>
+                </ul>
+                <br>
+              <li><b>※JR灘、阪神岩屋を経由します</b></li>
+              <li><b>※1時間に1本程度の運行ですのでご注意ください</b></li>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="trainsport" role="tabpanel" aria-labelledby="trainsport-tab">
+        <h4 class="mt-4 mb-4"><i class="bi bi-train-front-fill"></i>電車をご利用の場合</h4>
+        <div class="info-table">
+          <div class="info-box">
+            <p><strong>JR：</strong>神戸線灘駅南口から南へ徒歩約10分</p>
+          </div>
+          <div class="info-box">
+            <p><strong>阪神電車：</strong>岩屋駅（兵庫県立美術館前）から南へ徒歩約8分</p>
+          </div>
+          <div class="info-box">
+            <p><strong>阪急電車：</strong>神戸線王子公園駅西口から南西へ徒歩約20分</p>
+          </div>
+        </div>
+        <div class="info-buttons" style="margin-top: 200px;">
+          <a href="https://www.google.co.jp/maps/dir/%E6%96%B0%E7%A5%9E%E6%88%B8%E9%A7%85%E3%80%81%E5%85%B5%E5%BA%AB%E7%9C%8C%E7%A5%9E%E6%88%B8%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8A%A0%E7%B4%8D%E7%94%BA%EF%BC%91%E4%B8%81%E7%9B%AE%EF%BC%93%E2%88%92%EF%BC%91/%E3%80%92651-0073+%E5%85%B5%E5%BA%AB%E7%9C%8C%E7%A5%9E%E6%88%B8%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E8%84%87%E6%B5%9C%E6%B5%B7%E5%B2%B8%E9%80%9A%EF%BC%91%E4%B8%81%E7%9B%AE%EF%BC%91%E2%88%92%EF%BC%91+%E5%85%B5%E5%BA%AB%E7%9C%8C%E7%AB%8B%E7%BE%8E%E8%A1%93%E9%A4%A8/@34.7003477,135.196817,15z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x60008ec34f49fb8b:0x790b10d9f54938fb!2m2!1d135.1954675!2d34.7062884!1m5!1m1!1s0x60008e86906eb067:0x828759978b8b47e2!2m2!1d135.2182515!2d34.6992495?hl=ja"
+            target="_blank">新神戸駅からの方はこちら</a>
+          <a href="https://www.google.co.jp/maps/dir/%E5%85%B5%E5%BA%AB%E7%9C%8C%E7%A5%9E%E6%88%B8%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%B8%83%E5%BC%95%E7%94%BA%EF%BC%94%E4%B8%81%E7%9B%AE%EF%BC%91%E2%88%92%EF%BC%91+JR%E4%B8%89%E3%83%8E%E5%AE%AE%E9%A7%85/%E5%85%B5%E5%BA%AB%E7%9C%8C%E7%A5%9E%E6%88%B8%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E8%84%87%E6%B5%9C%E6%B5%B7%E5%B2%B8%E9%80%9A%EF%BC%91%E4%B8%81%E7%9B%AE%EF%BC%91%E2%88%92%EF%BC%91+%E5%85%B5%E5%BA%AB%E7%9C%8C%E7%AB%8B%E7%BE%8E%E8%A1%93%E9%A4%A8/@34.6988106,135.1976453,15z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x60008ff4210bcb2d:0xc6deb0aa05faa3c1!2m2!1d135.1947843!2d34.6945827!1m5!1m1!1s0x60008e86906eb067:0x828759978b8b47e2!2m2!1d135.2182515!2d34.6992495?hl=ja"
+            target="_blank">三宮駅からの方はこちら</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <br><br><br>
+  <footer>
+    <h2>兵庫県立美術館</h2>
+    <div class="contact-info">
+      <p>〒651-0073　神戸市中央区脇浜海岸通1-1-1(HAT神戸内)</p>
+      <p>電話番号：078-262-1011</p>
+    </div>
+    <div class="links">
+      <a href="#">サイトマップ</a>
+      <a href="#">外部リンク集</a>
+      <a href="#">商業目的撮影のご案内</a>
+      <a href="#">個人情報保護方針</a>
+      <a href="#">サイトポリシー</a>
+      <a href="#">よくあるご質問</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <div class="copyright">
+      Copyright © Hyogo Prefectural Museum of Art. All rights reserved.
+    </div>
+
+  </footer>
+  <div class="back-to-top">
+    <a href="#top" id="backToTop">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 4l6 6H6z" />
+      </svg>
+      PAGE TOP
+    </a>
+  </div>
+
+  <script>
+    //PAGE TOP
+    document.getElementById("backToTop").addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const backToTopButton = document.querySelector('.back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    });
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="../_css/bootstrap.css">
+  <script src="../_js/popper.min.js"></script> 
+  <script src="../_js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    li[class^=nav] {
+      position: relative;
+    }
+
+    li[class^=nav]::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #656565;
+      transition: width 0.5s ease;
+    }
+
+    li[class^=nav]:hover::after {
+      width: 100%;
+    }
+
+
+    #mynav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    @media screen and (max-width: 992px) {
+      li[class^=nav]::after {
+        background-color: transparent;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      li[class^=nav]:hover {
+        text-shadow: 1px 1px 1px rgba(107, 106, 106, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+
+
+    i {
+      margin-right: 20px;
+    }
+
+    i:not(.myicon):hover {
+      color: grey;
+      cursor: pointer;
+    }
+
+
+    .topic {
+      font-weight: bold;
+    }
+
+
+
+
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .notice {
+      background-color: #ffffff;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .notice h2 {
+      font-size: 20px;
+      color: #007bff;
+    }
+
+    .important {
+      color: #e63946;
+      font-weight: bold;
+    }
+
+    .list-item {
+      margin-top: 10px;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #6c757d;
+    }
+
+    .table-section {
+      background-color: #ffffff;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-section h2 {
+      font-size: 20px;
+      color: #007bff;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #dbeafe;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background-color: #f0f9ff;
+      font-weight: bold;
+    }
+
+    table td {
+      background-color: #ffffff;
+    }
+
+    .table-note {
+      font-size: 14px;
+      color: #000000;
+      font-weight: bold;
+    }
+
+
+    footer {
+      background-color: #f9f9f9;
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      position: relative;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    footer h2 {
+      font-size: 1.5em;
+      margin: 0 0 10px;
+    }
+
+    footer p {
+      margin: 15px 0;
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    footer .links {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer .links a {
+      text-decoration: none;
+      color: #007BFF;
+      font-size: 0.9em;
+    }
+
+    footer .links a:hover {
+      text-decoration: underline;
+    }
+
+    footer .contact-info {
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    footer .copyright {
+      margin-top: 15px;
+      font-size: 0.8em;
+      color: #aaa;
+    }
+
+    .back-to-top {
+      position: absolute;
+      bottom: 0;
+      right: 20px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .back-to-top a {
+      display: inline-block;
+      text-decoration: none;
+      color: #555;
+      font-weight: bold;
+      font-size: 0.8em;
+    }
+
+    .back-to-top a:hover {
+      text-decoration: underline;
+    }
+
+    .back-to-top svg {
+      display: block;
+      margin: 0 auto;
+      fill: #555;
+      width: 30px;
+      height: 30px;
+    }
+
+    .back-to-top {
+      position: fixed;
+      margin-top: 700px;
+      display: none;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-xl bg-light fixed-top" id="mynav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img class="img-fluid" src="./logo.png" style="width: 200px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active topic text-wrap" aria-current="page" href="./index.html#new">最新情報</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active topic" aria-current="page" href="access.html">アクセス情報</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active topic" aria-current="page" href="#">総合案内</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active topic" aria-current="page" href="#">展覧会</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active topic" aria-current="page" href="hours.html">開館時間．料金</a>
+          </li>
+        </ul>
+
+        <i class="bi bi-twitter-x fs-5"></i>
+        <i class="bi bi-instagram fs-5"></i>
+        <i class="bi bi-youtube fs-5"></i>
+        <i class="bi bi-facebook fs-5"></i>
+
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="サイト内検索" aria-label="Search">
+          <i class="bi bi-search mt-2"></i>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <br><br>
+  <div class="container">
+    <div class="header">
+      <br><br>
+      <h1>開館時間・休館日</h1>
+    </div>
+
+    <div class="notice">
+      <span class="bi bi-alarm myicon" style="color: #007bff;">
+        <h2 style="display: inline-block;margin-left: 10px;" class="fw-bold">開館時間</h2>
+        </ㄋ>
+        <p style="color: #000000;">10:00～18:00（入場は17:30まで）</p>
+
+        <span class="bi bi-door-closed myicon pb-5" style="color: #007bff;">
+          <h2 style="display: inline-block;margin-left: 10px;" class="fw-bold">休館日</h2>
+        </span>
+        <p style="color: #000000;">月曜日（祝休日の場合は翌日）<br>年末年始</p>
+    </div>
+    <br><br>
+    <h1 style="text-align: center;">観覧料金</h1>
+    <br>
+    <div class="table-section">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>一般(障がい者)</th>
+            <th>70歳以上</th>
+            <th>大学生(障がい者)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>コレクション展 個人</td>
+            <td>500円（100円）</td>
+            <td>250円</td>
+            <td>400円（100円）</td>
+          </tr>
+          <tr>
+            <td>コレクション展 団体</td>
+            <td>400円（100円）</td>
+            <td>200円</td>
+            <td>300円（50円）</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul>
+        <li>高校生以下は無料。</li>
+        <li>団体は20名以上。</li>
+        <li>70歳以上、障がいのある方（身体障害者手帳・精神障害者保健福祉手帳・療育手帳の所持者）、被爆者手帳をお持ちの方は証明できるものをご提示ください。</li>
+        <li>障害者手帳アプリ「ミライロID」のご提示でも減免が適用されます。（スマートフォン画面にて必要な情報が確認できない場合は、原本のご提示をお願いすることがあります。）　「ミライロID」詳細は<a
+            href="https://mirairo-id.jp/" target="_blank">こちら</a>(外部サイト)</li>
+        <li>障がいのある方1名につき、その介護の方1名は無料。</li>
+        <li>コレクション展は、毎月第2日曜日 公益財団法人伊藤文化財団のご協力により無料で観覧できます。</li>
+      </ul>
+    </div>
+    <br><br><br>
+    <footer>
+      <h2>兵庫県立美術館</h2>
+      <div class="contact-info">
+        <p>〒651-0073　神戸市中央区脇浜海岸通1-1-1(HAT神戸内)</p>
+        <p>電話番号：078-262-1011</p>
+      </div>
+      <div class="links">
+        <a href="#">サイトマップ</a>
+        <a href="#">外部リンク集</a>
+        <a href="#">商業目的撮影のご案内</a>
+        <a href="#">個人情報保護方針</a>
+        <a href="#">サイトポリシー</a>
+        <a href="#">よくあるご質問</a>
+        <a href="#">お問い合わせ</a>
+      </div>
+      <div class="copyright">
+        Copyright © Hyogo Prefectural Museum of Art. All rights reserved.
+      </div>
+
+    </footer>
+    <div class="back-to-top">
+      <a href="#top" id="backToTop">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 4l6 6H6z" />
+        </svg>
+        PAGE TOP
+      </a>
+    </div>
+
+
+    <script>
+      document.getElementById("backToTop").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      const backToTopButton = document.querySelector('.back-to-top');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+          backToTopButton.style.display = 'block';
+        } else {
+
+          backToTopButton.style.display = 'none';
+        }
+      });
+    </script>
+
+</body>
+
+</html>
